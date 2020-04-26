@@ -2,7 +2,6 @@ from utils import HeatingElementController, MotorController, ThermocoupleControl
 
 HEATING_ELEMENT_CONTROL_PIN = 12
 MOTOR_CONTROL_PIN = 14
-THERMOCOUPLE_CONTROL_PIN = 15
 DISPLAY_I2CBUS = 0
 DISPLAY_ADDRESS = 0x27
 
@@ -15,7 +14,7 @@ def run_roaster():
     motor = MotorController(MOTOR_CONTROL_PIN)
     motor.drive_motor("r", "h")
 
-    therm = ThermocoupleController(THERMOCOUPLE_CONTROL_PIN)
+    therm = ThermocoupleController()
     print(therm.read_temp_c())
     print(therm.read_temp_f())
 
