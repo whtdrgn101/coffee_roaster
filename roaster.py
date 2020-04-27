@@ -20,12 +20,12 @@ def run_roaster():
     try:
 
         #Drive and blower motor is always on
-        drive_motor.drive_motor("r", "h")
-        blower_motor.drive_motor("r", "h")
+        drive_motor.drive_motor("f", "h")
+        blower_motor.drive_motor("f", "h")
 
         while True:
 
-            if therm.read_temp_f() > 425:
+            if therm.read_temp_f() > config.ROAST_TEMP:
                 heating.power_off()
             else:
                 heating.power_on()

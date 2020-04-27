@@ -9,6 +9,7 @@ class RoasterConfig:
     HEATING_ELEMENT_PIN = 0
     LCD_BUS_NUMBER = 0
     LCD_ADDRESS = 0
+    ROAST_TEMP = 0
 
     def __init__(self):
         #load file
@@ -23,4 +24,5 @@ class RoasterConfig:
         self.HEATING_ELEMENT_PIN = config["HEATING_ELEMENT_PIN"]
         self.LCD_BUS_NUMBER = config["LCD_BUS_NUMBER"]
         self.LCD_ADDRESS = int(config["LCD_ADDRESS"], 0)
+        self.ROAST_TEMP = float(config["ROAST_TEMP"])
 
