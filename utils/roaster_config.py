@@ -18,4 +18,5 @@ class RoasterConfig:
         self.MOTOR_REVERSE_PIN = config["MOTOR_REVERSE_PIN"]
         self.HEATING_ELEMENT_PIN = config["HEATING_ELEMENT_PIN"]
         self.LCD_BUS_NUMBER = config["LCD_BUS_NUMBER"]
+        self.LCD_ADDRESS = int(config["LCD_ADDRESS"], 0)
 

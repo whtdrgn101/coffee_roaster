@@ -1,8 +1,5 @@
 from utils import RoasterConfig, HeatingElementController, MotorController, ThermocoupleController, DisplayPanelController
 
-DISPLAY_ADDRESS = 0x27
-
-
 def run_roaster():
     print("Loading Config")
     config = RoasterConfig()
@@ -19,7 +16,7 @@ def run_roaster():
     print(therm.read_temp_f())
 
     #This will blow up until the device is actually looked up
-    display = DisplayPanelController(config.LCD_BUS_NUMBER, DISPLAY_ADDRESS)
+    display = DisplayPanelController(config.LCD_BUS_NUMBER, config.LCD_ADDRESS)
 
 
 if __name__ == "__main__":
