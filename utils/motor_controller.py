@@ -12,9 +12,6 @@ class MotorController:
         self.MOTOR_FORWARD = motor_forward_pin
         self.MOTOR_REVERSE = motor_reverse_pin
 
-        GPIO.cleanup()
-
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.MOTOR_FORWARD, GPIO.OUT)
         GPIO.setup(self.MOTOR_REVERSE, GPIO.OUT)
 

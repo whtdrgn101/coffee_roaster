@@ -8,9 +8,6 @@ class HeatingElementController:
         
         self.POWER_CONTROL_PIN = control_pin
 
-        GPIO.cleanup()
-
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.POWER_CONTROL_PIN, GPIO.OUT)
 
     def power_on(self):

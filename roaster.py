@@ -1,4 +1,5 @@
 from utils import RoasterConfig, HeatingElementController, MotorController, ThermocoupleController, DisplayPanelController
+import RPi.GPIO as GPIO
 
 def run_roaster():
 
@@ -24,4 +25,7 @@ def run_roaster():
 
 
 if __name__ == "__main__":
+    # All GPIO commands will be done by PIN number
+    GPIO.setmode(GPIO.BCM)
+    # Run the main loop for the roaster
     run_roaster()
