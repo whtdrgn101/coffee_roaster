@@ -1,23 +1,25 @@
-from utils import HeatingElementController, MotorController, ThermocoupleController, DisplayPanelController
+from utils import RoasterConfig, HeatingElementController, MotorController, ThermocoupleController, DisplayPanelController
 
-HEATING_ELEMENT_CONTROL_PIN = 12
-DISPLAY_I2CBUS = 1
 DISPLAY_ADDRESS = 0x27
 
 
 def run_roaster():
-    heating = HeatingElementController(HEATING_ELEMENT_CONTROL_PIN)
+    print("Loading Config")
+    config = RoasterConfig()
+
+    heating = HeatingElementController(config.HEATING_ELEMENT_PIN)
     heating.power_on()
     heating.power_off()
 
-    motor = MotorController()
+    motor = MotorController(config.MOTOR_FORWARD_PIN, config.MOTOR_REVERSE_PIN)
     motor.drive_motor("r", "h")
 
     therm = ThermocoupleController()
     print(therm.read_temp_c())
     print(therm.read_temp_f())
 
-    display = DisplayPanelController(DISPLAY_I2CBUS, DISPLAY_ADDRESS)
+    #This will blow up until the device is actually looked up
+    display = DisplayPanelController(config.LCD_BUS_NUMBER, DISPLAY_ADDRESS)
 
 
 if __name__ == "__main__":

@@ -2,11 +2,14 @@ import RPi.GPIO as GPIO
 
 class MotorController:
 
-    MOTOR_FORWARD = 17
-    MOTOR_REVERSE = 18
+    MOTOR_FORWARD = 0
+    MOTOR_REVERSE = 0
 
-    def __init__(self):
-        
+    def __init__(self, motor_forward_pin, motor_reverse_pin):
+    
+        self.MOTOR_FORWARD = motor_forward_pin
+        self.MOTOR_REVERSE = motor_reverse_pin
+
         GPIO.cleanup()
 
         GPIO.setmode(GPIO.BCM)
