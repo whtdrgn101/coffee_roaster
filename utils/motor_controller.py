@@ -4,9 +4,11 @@ class MotorController:
 
     MOTOR_FORWARD = 0
     MOTOR_REVERSE = 0
+    my_name = ""
 
-    def __init__(self, motor_forward_pin, motor_reverse_pin):
+    def __init__(self, name, motor_forward_pin, motor_reverse_pin):
     
+        self.my_name = name
         self.MOTOR_FORWARD = motor_forward_pin
         self.MOTOR_REVERSE = motor_reverse_pin
 
@@ -21,15 +23,15 @@ class MotorController:
         self.stop_motor()
 
         if direction == 'f':
-            print("MOTOR FORWARD");
-            GPIO.outout(self.MOTOR_FORWARD, GPIO.HIGH)
+            print("{0} MOTOR FORWARD".format(self.my_name));
+            GPIO.output(self.MOTOR_FORWARD, GPIO.HIGH)
         elif direction == 'r':
-            print("MOTOR REVERSE");
+            print("{0} MOTOR REVERSE".format(self.my_name));
             GPIO.output(self.MOTOR_REVERSE, GPIO.HIGH)
 
 
     def stop_motor(self):
         
-        print("MOTOR STOP")
+        print("{0} MOTOR STOP".format(self.my_name))
         GPIO.output(self.MOTOR_FORWARD, GPIO.LOW) 
         GPIO.output(self.MOTOR_REVERSE, GPIO.LOW) 

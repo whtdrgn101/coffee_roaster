@@ -19,4 +19,4 @@ class ThermocoupleController:
         return self.read_temp_c() * (9/5) + 32
 
     def read_temp_c(self):
-        return 200
+        return self.my_thermocouple.temperature 
