@@ -30,20 +30,26 @@ class RoastMaster:
         self.blower_motor = MotorController("BLOWER", self.config.BLOWER_FORWARD_PIN, self.config.BLOWER_REVERSE_PIN)
         self.therm = ThermocoupleController()
 
-
     def handle_stop_press(self):
         self.display.show("Stopped")
         self.RUNNING = False
 
     def handle_start_press(self):
-        self.display.show("Starting")
+        self.display.show("Initializing")
         self.RUNNING = True 
+   
+    # Colby's Coolness Sequence TBD
+    def cool_down(self):
+        self.display.show("Cooling Down")
+        self.heating.power_off()
+        print("burrrrr")
 
     def run_roaster(self):
 
         try:
 
             self.display.show("Press Start Button")
+            was_running = True
 
             while True:
 
@@ -65,6 +71,10 @@ class RoastMaster:
 
                     # Display Status
                     self.display.show("Temp: {0}f".format(temp))
+
+                elif self.RUNNING == False and was_running == True:
+                    was_running = False
+                    self.cool_down()
 
                 time.sleep(1)
 
