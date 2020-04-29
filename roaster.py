@@ -14,12 +14,13 @@ class RoastMaster:
 
     def __init__(self, config_file_loc):
         
-        #This will blow up until the device is actually hooked up
-        #display = DisplayPanelController(config.LCD_BUS_NUMBER, config.LCD_ADDRESS)
-
         # Bring up roaster components
         print("Loading Config")
         self.config = RoasterConfig(config_file_loc)
+
+        #This will blow up until the device is actually hooked up
+        self.display = DisplayPanelController(self.config.LCD_BUS_NUMBER, self.config.LCD_ADDRESS)
+
 
         # Setup Roaster Components
         self.start_button = ButtonController(self.config.START_BUTTON_PIN, self.handle_start_press)
@@ -31,16 +32,18 @@ class RoastMaster:
 
 
     def handle_stop_press(self):
-        print("STOP PRESS")
+        self.display.show("Stopped")
         self.RUNNING = False
 
     def handle_start_press(self):
-        print("START PRESS")
+        self.display.show("Starting")
         self.RUNNING = True 
 
     def run_roaster(self):
 
         try:
+
+            self.display.show("Press Start Button")
 
             while True:
 
@@ -61,16 +64,13 @@ class RoastMaster:
                         self.blower_motor.drive_motor("f")
 
                     # Display Status
-                    print("Temp: {0}f".format(temp))
-                    time.sleep(1)
+                    self.display.show("Temp: {0}f".format(temp))
 
-                else:
-                    print("Press Start Button")
-                    time.sleep(1)
+                time.sleep(1)
 
     
         except KeyboardInterrupt:
-            print("Shutting down")
+            self.display.show("Shutting down")
             self.heating.power_off()
             self.drive_motor.stop_motor()
             self.blower_motor.stop_motor()

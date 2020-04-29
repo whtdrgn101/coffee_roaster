@@ -10,11 +10,11 @@ class DisplayPanelController:
     def __init__(self, address, i2cbus):
         self.ADDRESS = address
         self.I2CBUS = i2cbus
-        self.mylcd = lcd()
+        #self.mylcd = lcd()
 
-    def display_string(self, display):
-        self.clear_screen()
-        print(display)
+    def show(self, line1="", line2=""):
+        #self.clear_screen()
+        print("{0}\n{1}".format(line1, line2))
 
     def clear_screen(self):
-        print("## CLEARING SCREEN ##")
+        print("")
