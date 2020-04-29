@@ -1,0 +1,11 @@
+[Unit]
+Description=Coffee Roaster Control Service
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/home/pi/coffee_roaster
+ExecStart=/usr/bin/python3.7 /home/pi/coffee_roaster/roaster.py > /var/log/roaster.log
+
+[Install]
+WantedBy=multi-user.target

@@ -13,9 +13,9 @@ class RoasterConfig:
     LCD_ADDRESS = 0
     ROAST_TEMP = 0
 
-    def __init__(self):
+    def __init__(self, config_file):
         #load file
-        with open('config.json') as f:
+        with open(config_file) as f:
             config = json.load(f)
 
         #parse file

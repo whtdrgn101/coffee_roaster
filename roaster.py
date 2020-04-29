@@ -12,14 +12,14 @@ class RoastMaster:
     drive_motor = None
     therm = None
 
-    def __init__(self):
+    def __init__(self, config_file_loc):
         
         #This will blow up until the device is actually hooked up
         #display = DisplayPanelController(config.LCD_BUS_NUMBER, config.LCD_ADDRESS)
 
         # Bring up roaster components
         print("Loading Config")
-        self.config = RoasterConfig()
+        self.config = RoasterConfig(config_file_loc)
 
         # Setup Roaster Components
         self.start_button = ButtonController(self.config.START_BUTTON_PIN, self.handle_start_press)
@@ -80,6 +80,6 @@ class RoastMaster:
 
 if __name__ == "__main__":
     # Run the main loop for the roaster
-    roaster = RoastMaster()
+    roaster = RoastMaster('/home/pi/coffee_roaster/config.json')
     roaster.run_roaster()
     GPIO.cleanup()
