@@ -1,4 +1,4 @@
-from utils import RoasterConfig, HeatingElementController, MotorController, ThermocoupleController, DisplayPanelController, ButtonController
+from utils import RoasterConfig, HeatingElementController, MotorController, ButtonController, ThermocoupleController, DisplayPanelController
 import RPi.GPIO as GPIO
 import time
 
@@ -14,9 +14,6 @@ class RoastMaster:
 
     def __init__(self):
         
-        # All GPIO commands will be done by PIN number
-        GPIO.setmode(GPIO.BOARD)
-        print(GPIO.getmode())
         #This will blow up until the device is actually hooked up
         #display = DisplayPanelController(config.LCD_BUS_NUMBER, config.LCD_ADDRESS)
 
