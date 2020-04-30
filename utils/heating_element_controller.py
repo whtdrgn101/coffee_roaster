@@ -12,11 +12,9 @@ class HeatingElementController:
         GPIO.setup(self.POWER_CONTROL_PIN, GPIO.OUT)
 
     def power_on(self):
-        print("Heating Element Turning ON")
         GPIO.output(self.POWER_CONTROL_PIN, GPIO.HIGH) 
         self.IS_ON = True
 
     def power_off(self):
-        print("Heating Element Turning OFF")
         GPIO.output(self.POWER_CONTROL_PIN, GPIO.LOW) 
         self.IS_ON = False

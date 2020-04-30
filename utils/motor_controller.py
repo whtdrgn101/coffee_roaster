@@ -21,10 +21,8 @@ class MotorController:
         self.stop_motor()
 
         if direction == 'f':
-            print("{0} MOTOR FORWARD".format(self.my_name));
             GPIO.output(self.MOTOR_FORWARD, GPIO.HIGH)
         elif direction == 'r':
-            print("{0} MOTOR REVERSE".format(self.my_name));
             GPIO.output(self.MOTOR_REVERSE, GPIO.HIGH)
         
         self.IS_MOVING = True
@@ -32,7 +30,6 @@ class MotorController:
 
     def stop_motor(self):
         
-        print("{0} MOTOR STOP".format(self.my_name))
         GPIO.output(self.MOTOR_FORWARD, GPIO.LOW) 
         GPIO.output(self.MOTOR_REVERSE, GPIO.LOW) 
         self.IS_MOVING = False

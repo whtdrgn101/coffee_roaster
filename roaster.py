@@ -40,12 +40,19 @@ class RoastMaster:
    
     # Colby's Coolness Sequence TBD
     def cool_down(self):
-        self.display.show("Cooling Down")
         self.heating.power_off()
-        time.sleep(self.config.COOL_TIME_SEC)
+        for i in range(1, int(self.config.COOL_TIME_SEC)):
+            self.show_status("Cooling Down...")
+            time.sleep(1)
+        
         self.drive_motor.stop_motor()
         self.blower_motor.stop_motor()
 
+
+    def show_status(self, message):
+        self.display.show(message[0:16],
+                "T:{0}f H:{1:d} M:{2:d}".format(self.therm.read_temp_f(), self.heating.IS_ON, self.drive_motor.IS_MOVING) 
+        )
     def run_roaster(self):
 
         try:
@@ -74,7 +81,7 @@ class RoastMaster:
                         self.blower_motor.drive_motor("f")
 
                     # Display Status
-                    self.display.show("Temp: {0}f".format(temp))
+                    self.show_status("Running...")
 
                 elif self.RUNNING == False and was_running == True:
                     was_running = False
@@ -84,7 +91,7 @@ class RoastMaster:
 
     
         except KeyboardInterrupt:
-            self.display.show("Shutting down")
+            self.show_status("Shutting Down...")
             self.heating.power_off()
             self.drive_motor.stop_motor()
             self.blower_motor.stop_motor()
