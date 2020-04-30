@@ -42,18 +42,22 @@ class RoastMaster:
     def cool_down(self):
         self.display.show("Cooling Down")
         self.heating.power_off()
-        print("burrrrr")
+        time.sleep(self.config.COOL_TIME_SEC)
+        self.drive_motor.stop_motor()
+        self.blower_motor.stop_motor()
 
     def run_roaster(self):
 
         try:
 
             self.display.show("Press Start Button")
-            was_running = True
+            was_running = False
 
             while True:
 
                 if self.RUNNING == True:
+                    
+                    was_running = True
 
                     # TEMP & HEATING STATE
                     temp = self.therm.read_temp_f()
