@@ -5,6 +5,7 @@ import time
 class RoastMaster:
 
     RUNNING = False 
+    was_running = False
     config = None 
     start_button = None
     stop_button = None
@@ -20,7 +21,6 @@ class RoastMaster:
 
         #This will blow up until the device is actually hooked up
         self.display = DisplayPanelController(self.config.LCD_BUS_NUMBER, self.config.LCD_ADDRESS)
-
 
         # Setup Roaster Components
         self.start_button = ButtonController(self.config.START_BUTTON_PIN, self.handle_start_press)
@@ -57,14 +57,11 @@ class RoastMaster:
 
         try:
 
-            self.display.show("Press Start Button")
-            was_running = False
-
             while True:
 
                 if self.RUNNING == True:
                     
-                    was_running = True
+                    self.was_running = True
 
                     # TEMP & HEATING STATE
                     temp = self.therm.read_temp_f()
@@ -83,9 +80,12 @@ class RoastMaster:
                     # Display Status
                     self.show_status("Running...")
 
-                elif self.RUNNING == False and was_running == True:
-                    was_running = False
+                elif self.RUNNING == False and self.was_running == True:
+                    self.was_running = False
                     self.cool_down()
+                else:
+                    self.display.show("Press Start Button")
+
 
                 time.sleep(1)
 
