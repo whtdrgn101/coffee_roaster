@@ -20,7 +20,7 @@ class RoastMaster:
         self.config = RoasterConfig(config_file_loc)
 
         #This will blow up until the device is actually hooked up
-        self.display = DisplayPanelController(self.config.LCD_BUS_NUMBER, self.config.LCD_ADDRESS)
+        self.display = DisplayPanelController(self.config.LCD_ADDRESS, self.config.LCD_BUS_NUMBER)
 
         # Setup Roaster Components
         self.start_button = ButtonController(self.config.START_BUTTON_PIN, self.handle_start_press)
@@ -51,7 +51,7 @@ class RoastMaster:
 
     def show_status(self, message):
         self.display.show(message[0:16],
-                "T:{0}f H:{1:d} M:{2:d}".format(self.therm.read_temp_f(), self.heating.IS_ON, self.drive_motor.IS_MOVING) 
+                "T:{0:.1f}f H:{1:d} M:{2:d}".format(self.therm.read_temp_f(), self.heating.IS_ON, self.drive_motor.IS_MOVING) 
         )
     def run_roaster(self):
 

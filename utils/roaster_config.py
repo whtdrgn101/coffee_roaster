@@ -27,7 +27,7 @@ class RoasterConfig:
         self.HEATING_ELEMENT_PIN = config["HEATING_ELEMENT_PIN"]
         self.START_BUTTON_PIN = config["START_BUTTON_PIN"]
         self.STOP_BUTTON_PIN = config["STOP_BUTTON_PIN"]
-        self.LCD_BUS_NUMBER = config["LCD_BUS_NUMBER"]
+        self.LCD_BUS_NUMBER = int(config["LCD_BUS_NUMBER"])
         self.LCD_ADDRESS = int(config["LCD_ADDRESS"], 0)
         self.ROAST_TEMP = float(config["ROAST_TEMP"])
         self.COOL_TIME_SEC = float(config["COOL_TIME_SEC"])
