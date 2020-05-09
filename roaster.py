@@ -84,7 +84,7 @@ class RoastMaster:
                     self.was_running = False
                     self.cool_down()
                 else:
-                    self.display.show("Press Start Button")
+                    self.display.show("Press Start Btn")
 
 
                 time.sleep(1)
@@ -95,6 +95,7 @@ class RoastMaster:
             self.heating.power_off()
             self.drive_motor.stop_motor()
             self.blower_motor.stop_motor()
+            self.display.clear_screen()
 
         finally:
             self.RUNNING = False
