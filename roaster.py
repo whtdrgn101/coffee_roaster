@@ -57,6 +57,8 @@ class RoastMaster:
 
         try:
 
+            show_idle = True
+
             while True:
 
                 if self.RUNNING == True:
@@ -83,8 +85,10 @@ class RoastMaster:
                 elif self.RUNNING == False and self.was_running == True:
                     self.was_running = False
                     self.cool_down()
-                else:
+                    show_idle = True
+                elif self.RUNNING == False and self.was_running == False and show_idle == True:
                     self.display.show("Press Start Btn")
+                    show_idle = False
 
 
                 time.sleep(1)
