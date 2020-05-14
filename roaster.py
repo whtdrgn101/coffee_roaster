@@ -1,4 +1,4 @@
-from utils import RoasterConfig, HeatingElementController, MotorController, ButtonController, ThermocoupleController, DisplayPanelController
+from utils import RoasterConfig, ButtonController, ThermocoupleController, DisplayPanelController, RelayController
 import RPi.GPIO as GPIO
 import time
 
@@ -25,9 +25,9 @@ class RoastMaster:
         # Setup Roaster Components
         self.start_button = ButtonController(self.config.START_BUTTON_PIN, self.handle_start_press)
         self.stop_button = ButtonController(self.config.STOP_BUTTON_PIN, self.handle_stop_press)
-        self.heating = HeatingElementController(self.config.HEATING_ELEMENT_PIN)
-        self.drive_motor = MotorController("DRIVE", self.config.MOTOR_FORWARD_PIN, self.config.MOTOR_REVERSE_PIN)
-        self.blower_motor = MotorController("BLOWER", self.config.BLOWER_FORWARD_PIN, self.config.BLOWER_REVERSE_PIN)
+        self.heating = RelayController(self.config.HEATING_ELEMENT_PIN)
+        self.drive_motor = RelayController(self.config.MOTOR_RELAY_PIN)
+        self.blower_motor = RelayController(self.config.BLOWER_RELAY_PIN)
         self.therm = ThermocoupleController()
 
     def handle_stop_press(self):
@@ -45,13 +45,13 @@ class RoastMaster:
             self.show_status("Cooling Down...")
             time.sleep(1)
         
-        self.drive_motor.stop_motor()
-        self.blower_motor.stop_motor()
+        self.drive_motor.power_off()
+        self.blower_motor.power_off()
 
 
     def show_status(self, message):
         self.display.show(message[0:16],
-                "T:{0:.1f}f H:{1:d} M:{2:d}".format(self.therm.read_temp_f(), self.heating.IS_ON, self.drive_motor.IS_MOVING) 
+                "T:{0:.1f}f H:{1:d} M:{2:d}".format(self.therm.read_temp_f(), self.heating.IS_ON, self.drive_motor.IS_ON) 
         )
     def run_roaster(self):
 
@@ -74,10 +74,10 @@ class RoastMaster:
                         self.heating.power_on()
 
                     # MOTOR STATE
-                    if self.drive_motor.IS_MOVING == False:
-                        self.drive_motor.drive_motor("f")
-                    if self.blower_motor.IS_MOVING == False:
-                        self.blower_motor.drive_motor("f")
+                    if self.drive_motor.IS_ON == False:
+                        self.drive_motor.power_on()
+                    if self.blower_motor.IS_ON == False:
+                        self.blower_motor.power_on()
 
                     # Display Status
                     self.show_status("Running...")
@@ -97,8 +97,8 @@ class RoastMaster:
         except KeyboardInterrupt:
             self.show_status("Shutting Down...")
             self.heating.power_off()
-            self.drive_motor.stop_motor()
-            self.blower_motor.stop_motor()
+            self.drive_motor.power_off()
+            self.blower_motor.power_off()
             self.display.clear_screen()
 
         finally:

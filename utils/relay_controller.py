@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO 
 
-class HeatingElementController:
+class RelayController:
 
     POWER_CONTROL_PIN = 0
     IS_ON = False

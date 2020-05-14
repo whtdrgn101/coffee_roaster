@@ -2,10 +2,8 @@ import json
 
 class RoasterConfig:
 
-    MOTOR_FORWARD_PIN = 0
-    MOTOR_REVERSE_PIN = 0
-    BLOWER_FORWARD_PIN = 0
-    BLOWER_REVERSE_PIN = 0
+    MOTOR_RELAY_PIN = 0
+    BLOWER_RELAY_PIN = 0
     HEATING_ELEMENT_PIN = 0
     START_BUTTON_PIN = 0
     STOP_BUTTON_PIN = 0
@@ -20,10 +18,8 @@ class RoasterConfig:
             config = json.load(f)
 
         #parse file
-        self.MOTOR_FORWARD_PIN = config["MOTOR_FORWARD_PIN"]
-        self.MOTOR_REVERSE_PIN = config["MOTOR_REVERSE_PIN"]
-        self.BLOWER_FORWARD_PIN = config["BLOWER_FORWARD_PIN"]
-        self.BLOWER_REVERSE_PIN = config["BLOWER_REVERSE_PIN"]
+        self.MOTOR_RELAY_PIN = config["MOTOR_RELAY_PIN"]
+        self.BLOWER_RELAY_PIN = config["BLOWER_RELAY_PIN"]
         self.HEATING_ELEMENT_PIN = config["HEATING_ELEMENT_PIN"]
         self.START_BUTTON_PIN = config["START_BUTTON_PIN"]
         self.STOP_BUTTON_PIN = config["STOP_BUTTON_PIN"]
