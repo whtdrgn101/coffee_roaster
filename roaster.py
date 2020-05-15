@@ -12,6 +12,7 @@ class RoastMaster:
     heating = None
     drive_motor = None
     therm = None
+    show_idle = True
 
     def __init__(self, config_file_loc):
         
@@ -37,6 +38,7 @@ class RoastMaster:
     def handle_start_press(self):
         self.display.show("Initializing")
         self.RUNNING = True 
+        self.show_idle = True
    
     # Colby's Coolness Sequence TBD
     def cool_down(self):
@@ -57,7 +59,6 @@ class RoastMaster:
 
         try:
 
-            show_idle = True
 
             while True:
 
@@ -85,10 +86,10 @@ class RoastMaster:
                 elif self.RUNNING == False and self.was_running == True:
                     self.was_running = False
                     self.cool_down()
-                    show_idle = True
-                elif self.RUNNING == False and self.was_running == False and show_idle == True:
+                    self.show_idle = True
+                elif self.RUNNING == False and self.was_running == False and self.show_idle == True:
                     self.display.show("Press Start Btn")
-                    show_idle = False
+                    self.show_idle = False
 
 
                 time.sleep(1)
