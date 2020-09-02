@@ -11,7 +11,7 @@ This file is the main driver of the microcontroller.  It uses the classes in the
 ### config.json
 This file contains all of the configuration data for the microcontroller.  It includes GPIO ping specifications as well as timing values and other default settings.
 
-### utiles folder
+### utils folder
 Each component in the coffee roaster that needs controlled by microcontroller becomes a class within this folder.  Any interaction between the components is controlled via the main roaster.py module so no classes reference each other excepting where there is an additional driver file for specific components like the "LCD Panel"
 
 ## References
