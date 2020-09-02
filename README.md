@@ -17,6 +17,6 @@ Each component in the coffee roaster that needs controlled by microcontroller be
 ## References
 
 * [MAX31856 Thermocouple Control](https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/python-circuitpython)
-* [L298 Motor Controller](https://maker.pro/raspberry-pi/tutorial/how-to-control-a-dc-motor-with-an-l298-controller-and-raspberry-pi)
+* [L298 Motor Controller](https://www.bluetin.io/python/gpio-pwm-raspberry-pi-h-bridge-dc-motor-control/)
 * [Project Documentation](https://docs.google.com/document/d/1oHwVflQFp4IHgEQ_DVCQFsYltsm2OGass9z3PHarOX0/edit?usp=sharing)
 * [AC Relay Infomation](https://robotdyn.com/relay-module-2-relays-5v.html)
