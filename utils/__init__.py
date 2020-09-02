@@ -3,3 +3,4 @@ from .display_panel_controller import DisplayPanelController
 from .roaster_config import RoasterConfig
 from .button_controller import ButtonController
 from .relay_controller import RelayController
+from .motor_controller import MotorController
