@@ -57,31 +57,42 @@ class RoastMaster:
         )
     def run_roaster(self):
 
+        error_count = 0
+
         try:
 
 
             while True:
 
                 if self.RUNNING == True:
-                    
-                    self.was_running = True
+                   
+                    try:
 
-                    # TEMP & HEATING STATE
-                    temp = self.therm.read_temp_f()
+                        self.was_running = True
 
-                    if temp > self.config.ROAST_TEMP and self.heating.IS_ON == True:
-                        self.heating.power_off()
-                    elif temp < self.config.ROAST_TEMP and self.heating.IS_ON == False:
-                        self.heating.power_on()
+                        # TEMP & HEATING STATE
+                        temp = self.therm.read_temp_f()
 
-                    # MOTOR STATE
-                    if self.drive_motor.IS_MOVING == False:
-                        self.drive_motor.drive_motor()
-                    if self.blower_motor.IS_ON == False:
-                        self.blower_motor.power_on()
+                        if temp > self.config.ROAST_TEMP and self.heating.IS_ON == True:
+                            self.heating.power_off()
+                        elif temp < self.config.ROAST_TEMP and self.heating.IS_ON == False:
+                            self.heating.power_on()
 
-                    # Display Status
-                    self.show_status("Running...")
+                        # MOTOR STATE
+                        if self.drive_motor.IS_MOVING == False:
+                            self.drive_motor.drive_motor()
+                        if self.blower_motor.IS_ON == False:
+                            self.blower_motor.power_on()
+
+                        # Display Status
+                        self.show_status("Running...")
+
+                    except KeyboardInterrupt as ki:
+                        raise ki
+                    except Exception as err:
+                        error_count = error_count + 1
+                        if error_count > 20:
+                            raise err
 
                 elif self.RUNNING == False and self.was_running == True:
                     self.was_running = False
@@ -101,6 +112,12 @@ class RoastMaster:
             self.drive_motor.stop_motor()
             self.blower_motor.power_off()
             self.display.clear_screen()
+
+        except Exception as err:
+            self.show_status("ERR: {}".format(err))
+            self.heating.power_off()
+            self.drive_motor.stop_motor()
+            self.blower_motor.power_off()
 
         finally:
             self.RUNNING = False
